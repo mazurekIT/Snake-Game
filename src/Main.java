@@ -10,7 +10,7 @@ public class Main {
         Gameplay gameplay = new Gameplay();
 
 
-        obj.setBounds(10,10,1000,700);
+        obj.setBounds(10,10,905,700);
         obj.setBackground(Color.BLACK);
         obj.setResizable(false);
         obj.setVisible(true);
