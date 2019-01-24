@@ -102,7 +102,79 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        timer.start();
 
+        if (right) {
+            for (int r = lengthofsnake - 1; r >= 0; r--) {
+                snakeylength[r + 1] = snakeylength[r];
+            }
+            for (int r = lengthofsnake; r >= 0; r--) {
+                if (r == 0) {
+                    snakexlength[r] = snakexlength[r] + 25;
+                } else {
+                    snakexlength[r] = snakexlength[r - 1];
+                }
+
+                if (snakexlength[r] > 850) {
+                    snakexlength[r] = 25;
+                }
+            }
+            repaint();
+        }
+
+        if (left) {
+            for (int r = lengthofsnake - 1; r >= 0; r--) {
+                snakeylength[r + 1] = snakeylength[r];
+            }
+            for (int r = lengthofsnake; r >= 0; r--) {
+                if (r == 0) {
+                    snakexlength[r] = snakexlength[r] - 25;
+                } else {
+                    snakexlength[r] = snakexlength[r - 1];
+                }
+
+                if (snakexlength[r] < 25) {
+                    snakexlength[r] = 850;
+                }
+            }
+            repaint();
+        }
+
+        if (up) {
+            for (int r = lengthofsnake - 1; r >= 0; r--) {
+                snakexlength[r + 1] = snakexlength[r];
+            }
+            for (int r = lengthofsnake; r >= 0; r--) {
+                if (r == 0) {
+                    snakeylength[r] = snakeylength[r] - 25;
+                } else {
+                    snakeylength[r] = snakeylength[r - 1];
+                }
+
+                if (snakeylength[r] < 75) {
+                    snakeylength[r] = 625;
+                }
+            }
+            repaint();
+        }
+
+        if (down) {
+            for (int r = lengthofsnake - 1; r >= 0; r--) {
+                snakexlength[r + 1] = snakexlength[r];
+            }
+            for (int r = lengthofsnake; r >= 0; r--) {
+                if (r == 0) {
+                    snakeylength[r] = snakeylength[r] + 25;
+                } else {
+                    snakeylength[r] = snakeylength[r - 1];
+                }
+
+                if (snakeylength[r] > 625) {
+                    snakeylength[r] = 75;
+                }
+            }
+            repaint();
+        }
     }
 
     @Override
@@ -112,7 +184,57 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            moves++;
+            right = true;
+            if (!left) {
+                right = true;
+            } else {
+                right = false;
+                left = true;
+            }
+            up = false;
+            down = false;
+        }
 
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            moves++;
+            left = true;
+            if (!right) {
+                left = true;
+            } else {
+                left = false;
+                right = true;
+            }
+            up = false;
+            down = false;
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            moves++;
+            up = true;
+            if (!down) {
+                up = true;
+            } else {
+                up = false;
+                down = true;
+            }
+            left = false;
+            right = false;
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            moves++;
+            down = true;
+            if (!up) {
+                down = true;
+            } else {
+                down = false;
+                up = true;
+            }
+            left = false;
+            right = false;
+        }
     }
 
     @Override
