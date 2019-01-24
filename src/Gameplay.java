@@ -7,8 +7,8 @@ import java.awt.event.KeyListener;
 
 public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
-    private int[] snakeXlength = new int[750];
-    private int[] snakeYlength = new int[750];
+    private int[] snakexlength = new int[750];
+    private int[] snakeylength = new int[750];
 
     private boolean left = false;
     private boolean right = false;
@@ -20,9 +20,13 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private ImageIcon downmouth;
     private ImageIcon leftmouth;
 
+    private int lengthofsnake = 3;
+
     private Timer timer;
     private int delay = 100;
     private ImageIcon snakeimage;
+
+    private int moves = 0;
 
 
     private ImageIcon titleImage;
@@ -36,6 +40,18 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     }
 
     public void paint(Graphics g) {
+
+        if (moves == 0) {
+            snakexlength[2] = 50;
+            snakexlength[1] = 75;
+            snakexlength[0] = 100;
+
+            snakeylength[2] = 100;
+            snakeylength[1] = 100;
+            snakeylength[0] = 100;
+        }
+
+
         //draw title image border
         g.setColor(Color.WHITE);
         g.drawRect(24, 10, 851, 55);
@@ -51,6 +67,34 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         //draw bacground for bacground
         g.setColor(Color.DARK_GRAY);
         g.fillRect(25, 75, 850, 575);
+
+        rightmouth = new ImageIcon("assets/rightmouth.png");
+        rightmouth.paintIcon(this, g, snakexlength[0], snakeylength[0]);
+
+        for (int i = 0; i < lengthofsnake; i++) {
+            if (i == 0 && right) {
+                rightmouth = new ImageIcon("assets/rightmouth.png");
+                rightmouth.paintIcon(this, g, snakexlength[i], snakeylength[i]);
+            }
+            if (i == 0 && left) {
+                leftmouth = new ImageIcon("assets/leftmouth.png");
+                leftmouth.paintIcon(this, g, snakexlength[i], snakeylength[i]);
+            }
+            if (i == 0 && up) {
+                upmouth = new ImageIcon("assets/upmouth.png");
+                upmouth.paintIcon(this, g, snakexlength[i], snakeylength[i]);
+            }
+            if (i == 0 && down) {
+                downmouth = new ImageIcon("assets/downmouth.png");
+                downmouth.paintIcon(this, g, snakexlength[i], snakeylength[i]);
+            }
+
+            if (i != 0) {
+                snakeimage = new ImageIcon("assets/snakeimage.png");
+                snakeimage.paintIcon(this, g, snakexlength[i], snakeylength[i]);
+
+            }
+        }
 
 
         g.dispose();
