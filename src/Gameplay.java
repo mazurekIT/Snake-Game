@@ -84,8 +84,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         //draw scores
         g.setColor(Color.white);
-        g.setFont(new Font("arial",Font.PLAIN,14));
-        g.drawString("Score: "+score, 780,30);
+        g.setFont(new Font("arial", Font.PLAIN, 14));
+        g.drawString("Score: " + score, 780, 30);
 
         rightmouth = new ImageIcon("assets/rightmouth.png");
         rightmouth.paintIcon(this, g, snakexlength[0], snakeylength[0]);
@@ -124,7 +124,24 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
         }
 
-        enemyimage.paintIcon(this,g,enemyxpos[xpos],enemyypos[ypos]);
+        enemyimage.paintIcon(this, g, enemyxpos[xpos], enemyypos[ypos]);
+
+        for (int b = 1; b < lengthofsnake; b++) {
+            if (snakexlength[b] == snakexlength[0] && snakeylength[b] == snakeylength[0]) {
+                right = false;
+                left = false;
+                up = false;
+                down = false;
+
+                g.setColor(Color.white);
+                g.setFont(new Font("arial", Font.BOLD, 50));
+                g.drawString("GAME OVER", 300, 300);
+
+                g.setFont(new Font("arial", Font.BOLD, 20));
+                g.drawString("Space to Restart", 350, 340);
+
+            }
+        }
 
         g.dispose();
     }
@@ -213,7 +230,12 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        if(e.getKeyCode()==)
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            moves = 0;
+            score = 0;
+            lengthofsnake = 3;
+            repaint();
+        }
 
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             moves++;
