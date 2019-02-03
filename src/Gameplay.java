@@ -39,9 +39,7 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int ypos = random.nextInt(23);
 
     private int score = 0;
-
     private int moves = 0;
-
 
     private ImageIcon titleImage;
 
@@ -64,7 +62,6 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
             snakeylength[1] = 100;
             snakeylength[0] = 100;
         }
-
 
         //draw title image border
         g.setColor(Color.WHITE);
