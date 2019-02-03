@@ -27,18 +27,18 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
     private int delay = 100;
     private ImageIcon snakeimage;
 
-    private int enemyxpos[]={25,50,75,100,125,150,175,200,225,250,275,300,
-    325,350,375,400,425,450,475,500,525,550,575,600,625,650,675,700,725,
-            750,775,800,825,850};
-    private int enemyypos[]={25,50,75,100,125,150,175,200,225,250,275,300,
-            325,350,375,400,425,450,475,500,525,550,575,600,625};
+    private int enemyxpos[] = {25, 50, 75, 100, 125, 150, 175, 200, 225, 250, 275, 300,
+            325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600, 625, 650, 675, 700, 725,
+            750, 775, 800, 825, 850};
+    private int enemyypos[] = {75, 100, 125, 150, 175, 200, 225, 250, 275, 300,
+            325, 350, 375, 400, 425, 450, 475, 500, 525, 550, 575, 600, 625};
 
     private ImageIcon enemyimage;
     private Random random = new Random();
     private int xpos = random.nextInt(34);
     private int ypos = random.nextInt(23);
 
-
+    private int score = 0;
 
     private int moves = 0;
 
@@ -82,6 +82,11 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         g.setColor(Color.DARK_GRAY);
         g.fillRect(25, 75, 850, 575);
 
+        //draw scores
+        g.setColor(Color.white);
+        g.setFont(new Font("arial",Font.PLAIN,14));
+        g.drawString("Score: "+score, 780,30);
+
         rightmouth = new ImageIcon("assets/rightmouth.png");
         rightmouth.paintIcon(this, g, snakexlength[0], snakeylength[0]);
 
@@ -111,8 +116,15 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
         }
 
         enemyimage = new ImageIcon("assets/enemy.png");
+        if (enemyxpos[xpos] == snakexlength[0] && enemyypos[ypos] == snakeylength[0]) {
+            score++;
+            lengthofsnake++;
+            xpos = random.nextInt(34);
+            ypos = random.nextInt(23);
 
+        }
 
+        enemyimage.paintIcon(this,g,enemyxpos[xpos],enemyypos[ypos]);
 
         g.dispose();
     }
@@ -201,6 +213,8 @@ public class Gameplay extends JPanel implements KeyListener, ActionListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if(e.getKeyCode()==)
+
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
             moves++;
             right = true;
